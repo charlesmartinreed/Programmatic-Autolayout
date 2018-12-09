@@ -15,7 +15,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        //constructing the app in code
+        window = UIWindow()
+        window?.makeKeyAndVisible()
+        
+        //let randomViewController = UIViewController()
+        //randomViewController.view.backgroundColor = .purple
+        
+        let layout = UICollectionViewFlowLayout() //organizes items into a grid, optional header and footer views
+        let swipingController = SwipingController(collectionViewLayout: layout)
+        window?.rootViewController = swipingController
+        
         return true
     }
 
