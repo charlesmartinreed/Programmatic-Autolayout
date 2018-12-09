@@ -8,9 +8,13 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+extension UIColor {
+    static var mainPink = UIColor(displayP3Red: 232/255, green: 68/255, blue: 133/255, alpha: 1)
+}
 
-    //MARK:- Properties
+class ViewController: UIViewController {
+    
+    //MARK:- View Properties
     let iconImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "Cactus"))
         imageView.translatesAutoresizingMaskIntoConstraints = false //enables autolayout for imageView
@@ -32,14 +36,78 @@ class ViewController: UIViewController {
         return textView
     }()
     
+    //private means only the enclosing declaration and extensions of this declaration IN THE SAME SOURCE file can use this
+    private let previousButton: UIButton = {
+        let button = UIButton(type: .system) //"system" styled button
+        button.setTitle("PREV", for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.setTitleColor(.gray, for: .normal)
+        
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private let nextButton: UIButton = {
+        let button = UIButton(type: .system) //"system" styled button
+        button.setTitle("NEXT", for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.setTitleColor(.gray, for: .normal)
+        button.setTitleColor(.mainPink, for: .normal)
+        
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private let pageControl: UIPageControl = {
+        let pc = UIPageControl()
+        pc.currentPage = 0
+        pc.numberOfPages = 4
+        pc.currentPageIndicatorTintColor = .mainPink
+        pc.pageIndicatorTintColor = UIColor(displayP3Red: 249/255, green: 207/255, blue: 224/255, alpha: 1)
+        
+        return pc
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(descriptionTextView)
         
+        setupBottomControls()
         setupLayout()
         
     }
     
+    //fileprivate = for use only within the defining source file
+    //MARK:- Button layout method
+    fileprivate func setupBottomControls() {
+        //view.addSubview(previousButton)
+        
+        let yellowView = UIView()
+        yellowView.backgroundColor = .yellow
+        
+        let blueView = UIView()
+        blueView.backgroundColor = .blue
+        
+        let orangeView = UIView()
+        orangeView.backgroundColor = .orange
+        
+        let bottomControlsStackView = UIStackView(arrangedSubviews: [previousButton, pageControl, nextButton])
+        bottomControlsStackView.translatesAutoresizingMaskIntoConstraints = false
+        bottomControlsStackView.distribution = .fillEqually
+        
+        view.addSubview(bottomControlsStackView)
+        
+        //anchor at top, left and right. Respect the notch and home area!
+        let buttonConstrants = [
+            bottomControlsStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            bottomControlsStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            bottomControlsStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            bottomControlsStackView.heightAnchor.constraint(equalToConstant: 50)]
+        
+        NSLayoutConstraint.activate(buttonConstrants)
+    }
+    
+    //MARK:- UI Layout method
     private func setupLayout() {
         //MARK:- Container and constraints for container
         let topImageContainerView = UIView()
@@ -50,9 +118,9 @@ class ViewController: UIViewController {
         //multiplier on heightAnchor means 1/2 of the parent view size - we also get landscape orientation handling with this sort of programmatic layout work
         //leading and trailing over left and right because certain languages are read right-to-left. Leading and trailing handle this use case.
         let topImageContainerConstraints = [
-            topImageContainerView.topAnchor.constraint(equalTo: view.topAnchor),
-            topImageContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            topImageContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            topImageContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            topImageContainerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            topImageContainerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             topImageContainerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5)]
         
         topImageContainerView.addSubview(iconImageView)
@@ -76,3 +144,4 @@ class ViewController: UIViewController {
 
 
 }
+
