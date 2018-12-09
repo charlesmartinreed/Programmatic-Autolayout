@@ -10,15 +10,30 @@ import UIKit
 
 class PageCell: UICollectionViewCell {
     
+    var page: Page? {
+        didSet {
+            guard let unwrappedPage = page else { return } //because named: constructor needs a non-optional, we'll unwrap with guard let
+            
+            iconImageView.image = UIImage(named: unwrappedPage.imageName)
+            
+            let attributedText = NSMutableAttributedString(string: unwrappedPage.headerText, attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 18)])
+            
+            attributedText.append(NSAttributedString(string: "\n\n\n\(unwrappedPage.bodyText)", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 13), NSAttributedString.Key.foregroundColor : UIColor.gray]))
+            
+            descriptionTextView.attributedText = attributedText
+            descriptionTextView.textAlignment = .center
+        }
+    }
+    
     //MARK:- UI Properties
-    let iconImageView: UIImageView = {
+    private let iconImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "Cactus"))
         imageView.translatesAutoresizingMaskIntoConstraints = false //enables autolayout for imageView
         imageView.contentMode = .scaleAspectFit //w and h stay the same regardless of imageView size
         return imageView
     }()
     
-    let descriptionTextView: UITextView = {
+    private let descriptionTextView: UITextView = {
         let textView = UITextView()
         let attributedText = NSMutableAttributedString(string: "Welcome to Aspira! Let's walk through the onboarding process - don't worry, it'll be brief!", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 18)])
         

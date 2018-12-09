@@ -10,6 +10,14 @@ import UIKit
 
 class SwipingController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
+    //MARK: Page model induction
+    let pages = [
+        Page(imageName: "Cactus", headerText: "Welcome to Aspira!", bodyText: "There is no real reason to be creative here."),
+        Page(imageName: "Directions", headerText: "We make work feel like play!", bodyText: "So guess what? I'm going to mail it in."),
+        Page(imageName: "Field", headerText: "We're glad to have you as a part of our family!", bodyText: "If you're reading this, you must be really bored and cruising Github."),
+        Page(imageName: "Nightdesert", headerText: "Here are some important contacts:", bodyText: "Please forgive any obvious mistakes, I'm but a humble Swift apprentice.")
+    ]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,15 +32,22 @@ class SwipingController: UICollectionViewController, UICollectionViewDelegateFlo
     
     //MARK:- CollectionView Delegate methods
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4 //number of screens in our app, basically
+        return pages.count //number of screens in our app, basically
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath)
-        //color array for testing purposes
-        //let colors: [UIColor] = [.red, .orange, .yellow, .green]
-        //cell.backgroundColor = colors[indexPath.item]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! PageCell //cast as the proper Cell class
+        
+        //page image
+        let page = pages[indexPath.item]
+        cell.page = page
+        
+        //since this is a controller, we pass the model object to the view
+        //cell.iconImageView.image = UIImage(named: page.imageName)
+        
+        //page header
+        //cell.descriptionTextView.text = page.headerText
         
         //cell.backgroundColor = indexPath.item % 2 == 0 ? .red : .green
         return cell

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C03613221BDDA58007DAA92 /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C03613121BDDA58007DAA92 /* Page.swift */; };
 		8C40B7A021BB7DE200AED858 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C40B79F21BB7DE200AED858 /* AppDelegate.swift */; };
 		8C40B7A221BB7DE200AED858 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C40B7A121BB7DE200AED858 /* ViewController.swift */; };
 		8C40B7A521BB7DE200AED858 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C40B7A321BB7DE200AED858 /* Main.storyboard */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8C03613121BDDA58007DAA92 /* Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
 		8C40B79C21BB7DE200AED858 /* Programmatic Autolayout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Programmatic Autolayout.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C40B79F21BB7DE200AED858 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8C40B7A121BB7DE200AED858 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -39,6 +41,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8C03613321BDDBB6007DAA92 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8C03613121BDDA58007DAA92 /* Page.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8C03613421BDDEAB007DAA92 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8CECC44E21BCBC0C0062EA38 /* SwipingController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		8C03613521BDDEBB007DAA92 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8CECC45021BCC2BD0062EA38 /* PageCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		8C40B79321BB7DE200AED858 = {
 			isa = PBXGroup;
 			children = (
@@ -64,8 +90,9 @@
 				8C40B7A621BB7DE300AED858 /* Assets.xcassets */,
 				8C40B7A821BB7DE300AED858 /* LaunchScreen.storyboard */,
 				8C40B7AB21BB7DE300AED858 /* Info.plist */,
-				8CECC44E21BCBC0C0062EA38 /* SwipingController.swift */,
-				8CECC45021BCC2BD0062EA38 /* PageCell.swift */,
+				8C03613421BDDEAB007DAA92 /* Controller */,
+				8C03613521BDDEBB007DAA92 /* View */,
+				8C03613321BDDBB6007DAA92 /* Model */,
 			);
 			path = "Programmatic Autolayout";
 			sourceTree = "<group>";
@@ -145,6 +172,7 @@
 				8C40B7A021BB7DE200AED858 /* AppDelegate.swift in Sources */,
 				8CECC45121BCC2BD0062EA38 /* PageCell.swift in Sources */,
 				8CECC44F21BCBC0C0062EA38 /* SwipingController.swift in Sources */,
+				8C03613221BDDA58007DAA92 /* Page.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
