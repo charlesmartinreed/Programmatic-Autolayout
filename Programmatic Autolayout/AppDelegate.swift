@@ -24,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //randomViewController.view.backgroundColor = .purple
         
         let layout = UICollectionViewFlowLayout() //organizes items into a grid, optional header and footer views
+        layout.scrollDirection = .horizontal //a rough fix for laying out the collection views horizontally
         let swipingController = SwipingController(collectionViewLayout: layout)
         window?.rootViewController = swipingController
         

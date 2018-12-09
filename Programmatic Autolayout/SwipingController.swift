@@ -13,10 +13,13 @@ class SwipingController: UICollectionViewController, UICollectionViewDelegateFlo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.backgroundColor = .green
+        collectionView.backgroundColor = .white
         
-        //register cell
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cellId")
+        //register a custom cell to implement our custom pages
+        collectionView.register(PageCell.self, forCellWithReuseIdentifier: "cellId")
+        
+        //enable pagination for individual cells - this allows the familiar "snapping" behavior one expects when switching between pages.
+        collectionView.isPagingEnabled = true
     }
     
     //MARK:- CollectionView Delegate methods
@@ -27,9 +30,18 @@ class SwipingController: UICollectionViewController, UICollectionViewDelegateFlo
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath)
-        cell.backgroundColor = .red
+        //color array for testing purposes
+        //let colors: [UIColor] = [.red, .orange, .yellow, .green]
+        //cell.backgroundColor = colors[indexPath.item]
         
+        //cell.backgroundColor = indexPath.item % 2 == 0 ? .red : .green
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        
+        return 0
+        
     }
     
     //MARK:- UICollectionViewDelegateFlowLayout delegate methods
