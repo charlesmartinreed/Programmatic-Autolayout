@@ -46,7 +46,7 @@ class SwipingController: UICollectionViewController, UICollectionViewDelegateFlo
         return button
     }()
     
-    private lazy var pageControl: UIPageControl = {
+    lazy var pageControl: UIPageControl = {
         let pc = UIPageControl()
         pc.currentPage = 0
         pc.numberOfPages = pages.count
@@ -128,61 +128,6 @@ class SwipingController: UICollectionViewController, UICollectionViewDelegateFlo
         collectionView.isPagingEnabled = true
     }
     
-    //MARK:- CollectionView Delegate methods
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return pages.count //number of screens in our app, basically
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! PageCell //cast as the proper Cell class
-        
-        //page image
-        let page = pages[indexPath.item]
-        cell.page = page
-        
-        //since this is a controller, we pass the model object to the view
-        //cell.iconImageView.image = UIImage(named: page.imageName)
-        
-        //page header
-        //cell.descriptionTextView.text = page.headerText
-        
-        //cell.backgroundColor = indexPath.item % 2 == 0 ? .red : .green
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        
-        return 0
-        
-    }
-    
-    //MARK:- UICollectionViewDelegateFlowLayout delegate methods
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        //cells should be the entire width and height of the parent view
-        return CGSize(width: view.frame.width, height: view.frame.height)
-    }
-    
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        
-        //coordinator will run an animation during the update
-        coordinator.animate(alongsideTransition: { (_) in
-            self.collectionViewLayout.invalidateLayout() //lets the layout redraw itself during the next view layout update cycle
-            
-            //iPhone X/XS screen fix for page 0 layout issue
-            if self.pageControl.currentPage == 0 {
-                self.collectionView.contentOffset = .zero
-            } else {
-                //animate back to the proper page
-                let indexPath = IndexPath(item: self.pageControl.currentPage, section: 0)
-                self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-            }
-        }) { (_) in
-            //do stuff
-        }
-        
-        
-    }
+   
     
 }
