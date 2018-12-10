@@ -46,44 +46,11 @@ class PageCell: UICollectionViewCell {
         textView.isScrollEnabled = false
         return textView
     }()
-    
-    //private means only the enclosing declaration and extensions of this declaration IN THE SAME SOURCE file can use this
-    private let previousButton: UIButton = {
-        let button = UIButton(type: .system) //"system" styled button
-        button.setTitle("PREV", for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-        button.setTitleColor(.gray, for: .normal)
-        
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
-    private let nextButton: UIButton = {
-        let button = UIButton(type: .system) //"system" styled button
-        button.setTitle("NEXT", for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-        button.setTitleColor(.gray, for: .normal)
-        button.setTitleColor(.mainPink, for: .normal)
-        
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
-    private let pageControl: UIPageControl = {
-        let pc = UIPageControl()
-        pc.currentPage = 0
-        pc.numberOfPages = 4
-        pc.currentPageIndicatorTintColor = .mainPink
-        pc.pageIndicatorTintColor = UIColor(displayP3Red: 249/255, green: 207/255, blue: 224/255, alpha: 1)
-        
-        return pc
-    }()
 
     //MARK:- Init statements
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupLayout()
-        setupBottomControls()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -124,33 +91,5 @@ class PageCell: UICollectionViewCell {
         NSLayoutConstraint.activate(topImageContainerConstraints)
         NSLayoutConstraint.activate(iconConstraints)
         NSLayoutConstraint.activate(textViewConstraints)
-    }
-    
-    fileprivate func setupBottomControls() {
-        //view.addSubview(previousButton)
-        
-        let yellowView = UIView()
-        yellowView.backgroundColor = .yellow
-        
-        let blueView = UIView()
-        blueView.backgroundColor = .blue
-        
-        let orangeView = UIView()
-        orangeView.backgroundColor = .orange
-        
-        let bottomControlsStackView = UIStackView(arrangedSubviews: [previousButton, pageControl, nextButton])
-        bottomControlsStackView.translatesAutoresizingMaskIntoConstraints = false
-        bottomControlsStackView.distribution = .fillEqually
-        
-        addSubview(bottomControlsStackView)
-        
-        //anchor at top, left and right. Respect the notch and home area!
-        let buttonConstrants = [
-            bottomControlsStackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-            bottomControlsStackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            bottomControlsStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-            bottomControlsStackView.heightAnchor.constraint(equalToConstant: 50)]
-        
-        NSLayoutConstraint.activate(buttonConstrants)
     }
 }
